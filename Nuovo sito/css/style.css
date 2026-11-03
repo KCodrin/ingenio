@@ -1,20 +1,20 @@
 /* Ingenio — mondo scuro: luce verde (Ingenio) contro ombra ambrata (Hazard) */
 :root {
-  --night: #050d09;
-  --deep: #0a1711;
-  --panel: #10211a;
-  --line: rgba(190, 255, 215, 0.12);
-  --text: #eef6f1;
-  --soft: #a9bdb2;
-  --green: #2fe382;
-  --green-ink: #03140b;
-  --green-dim: #13814a;
+  --night: #0d1517;
+  --deep: #19272b;
+  --panel: #213237;
+  --line: rgba(255, 255, 255, 0.1);
+  --text: #ffffff;
+  --soft: rgba(255, 255, 255, 0.6);
+  --green: #97e14d;
+  --green-ink: #000000;
+  --green-dim: #4f7a24;
   --amber: #ffb547;
   --amber-dim: #8a5a12;
-  --radius: 18px;
+  --radius: 6px;
   --wrap: min(1200px, calc(100% - 32px));
-  --display: "Bricolage Grotesque", "Instrument Sans", sans-serif;
-  --body: "Instrument Sans", system-ui, sans-serif;
+  --display: "Plus Jakarta Sans", sans-serif;
+  --body: "Plus Jakarta Sans", system-ui, sans-serif;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   color-scheme: dark;
 }
@@ -25,16 +25,16 @@ body {
   margin: 0;
   background: var(--night);
   color: var(--text);
-  font: 400 1.0625rem/1.65 var(--body);
+  font: 400 17px/1.7 var(--body);
   -webkit-font-smoothing: antialiased;
 }
 ::selection { background: var(--green); color: var(--green-ink); }
 img { display: block; max-width: 100%; height: auto; }
 a { color: inherit; }
 p { margin: 0 0 1em; color: var(--soft); max-width: 65ch; }
-h1, h2, h3 { font-family: var(--display); line-height: 1.02; letter-spacing: -0.03em; margin: 0 0 0.4em; text-wrap: balance; font-weight: 700; }
-h1 { font-size: clamp(2.8rem, 7vw, 5.6rem); }
-h2 { font-size: clamp(2rem, 4.6vw, 3.6rem); }
+h1, h2, h3 { font-family: var(--display); line-height: 1.02; letter-spacing: -0.035em; margin: 0 0 0.4em; text-wrap: balance; font-weight: 600; }
+h1 { font-size: clamp(2.8rem, 6vw, 5rem); }
+h2 { font-size: clamp(2rem, 3.6vw, 2.85rem); }
 h3 { font-size: clamp(1.25rem, 2vw, 1.6rem); letter-spacing: -0.015em; }
 :focus-visible { outline: 3px solid var(--green); outline-offset: 3px; border-radius: 6px; }
 .wrap { width: var(--wrap); margin-inline: auto; }
@@ -252,3 +252,46 @@ section { padding: clamp(72px, 10vw, 128px) 0; position: relative; }
   }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+
+/* ---- Stile Crafto: pulsanti, etichette, hero centrato, numeri, parola in trasparenza ---- */
+.btn { min-height: 52px; padding: 0 28px; font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; border-color: rgba(255,255,255,.2); }
+.btn-g { box-shadow: none; }
+.btn-g:hover { background: #aaee66; }
+.hdr .btn { min-height: 40px; padding: 0 20px; font-size: 12px; background: rgba(151,225,77,.2); color: var(--text); border-color: var(--green); }
+.hdr .btn:hover { background: var(--green); color: var(--green-ink); }
+.hdr { background: rgba(13, 21, 23, 0.6); }
+.nav a { font-size: 15px; font-weight: 500; color: var(--text); }
+.nav a:hover { background: none; color: var(--green); }
+.label { display: inline-block; margin-bottom: 14px; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--green); }
+.head { margin-bottom: 56px; }
+section:nth-of-type(even):not(.hero):not(.cta):not(.manifesto) { background: var(--deep); }
+section:nth-of-type(even) .svc, section:nth-of-type(even) .steps li, section:nth-of-type(even) .duel > div, section:nth-of-type(even) .news a, section:nth-of-type(even) .kid-card, section:nth-of-type(even) .courses li, section:nth-of-type(even) .char { background-color: var(--night); }
+.hero-home { text-align: center; }
+.hero-home::after { background: radial-gradient(70% 70% at 50% 45%, rgba(13,21,23,.55), rgba(13,21,23,.9)), linear-gradient(0deg, var(--night), transparent 35%); }
+.hero-home > img { object-position: 75% center; }
+.hero-home h1 { max-width: 14ch; margin-inline: auto; }
+.hero-home .lead { margin-inline: auto; }
+.hero-home .actions { justify-content: center; }
+.stats { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 0; margin: 48px 0 0; padding: 0; list-style: none; border: 1px solid var(--line); border-radius: 999px; background: rgba(13,21,23,.5); backdrop-filter: blur(6px); }
+.stats li { padding: 12px 28px; font-size: 15px; color: var(--soft); }
+.stats li + li { border-left: 1px solid var(--line); }
+.stats b { color: var(--text); font-size: 18px; font-weight: 700; margin-right: 4px; }
+@media (max-width: 600px) { .stats { border-radius: var(--radius); } .stats li + li { border-left: 0; border-top: 1px solid var(--line); } .stats li { width: 100%; } }
+.manifesto { overflow: hidden; }
+.ghost { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font: 700 clamp(5rem, 16vw, 15rem)/1 var(--display); letter-spacing: -0.05em; color: rgba(255,255,255,.04); white-space: nowrap; pointer-events: none; }
+.manifesto .wrap { position: relative; }
+.manifesto p { font-weight: 600; }
+.svc, .char, .news a, .steps li, .kid-card, .form, .courses li { border-radius: var(--radius); }
+.svc:hover { border-color: var(--green); }
+.char.in, .char.hz { box-shadow: none; }
+.steps li::before { background: var(--green); color: var(--green-ink); }
+.svc-full li { list-style: none; position: relative; padding-left: 30px; margin-bottom: 10px; color: var(--text); }
+.svc-full ul { padding-left: 0; }
+.svc-full li::before { content: ""; position: absolute; left: 0; top: 4px; width: 20px; height: 20px; border-radius: 50%; background: rgba(151,225,77,.15) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2397e14d' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12 4 4 8-8'/%3E%3C/svg%3E") center / 12px no-repeat; }
+.cta .wrap { border-radius: var(--radius); background: var(--green); border: 0; }
+.cta h2, .cta .lead { color: var(--green-ink); }
+.cta .btn-g { background: var(--green-ink); color: var(--text); border-color: var(--green-ink); }
+.cta .btn:not(.btn-g) { color: var(--green-ink); border-color: rgba(0,0,0,.3); }
+.cta .btn:not(.btn-g):hover { background: rgba(0,0,0,.08); }
+.nl button { font-family: var(--body); font-size: 12px; }
+.chips a, .chips button { font-size: 14px; }

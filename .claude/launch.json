@@ -1,1 +1,3 @@
-{"version":"0.0.1","configurations":[{"name":"nuovo-sito","runtimeExecutable":"python3","runtimeArgs":["-m","http.server","8765","--directory","Nuovo sito"],"port":8765}]}
+{"version":"0.0.1","configurations":[
+{"name":"nuovo-sito","runtimeExecutable":"python3","runtimeArgs":["-m","http.server","8765","--directory","Nuovo sito"],"port":8765},
+{"name":"crafto","runtimeExecutable":"python3","runtimeArgs":["-m","http.server","8766","--directory","PER IL DESIGN"],"port":8766}]}
