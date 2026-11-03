@@ -1,4 +1,4 @@
-/* Ingenio — stile dalla cartella referenza: nero, verde #00e676, card a vetro. Ambra = Hazard. */
+/* Ingenio — stile dalla cartella referenza: nero, verde #00e676, card a vetro. Rosso = Hazard. */
 :root {
   --night: #050505;
   --deep: #0a0a0a;
@@ -9,8 +9,8 @@
   --green: #00e676;
   --green-ink: #0a0a0a;
   --green-dim: #00c853;
-  --amber: #ffb547;
-  --amber-dim: #8a5a12;
+  --hazard: #ff3b5c;
+  --hazard-dim: #9e1a33;
   --radius: 15px;
   --wrap: min(1200px, calc(100% - 32px));
   --display: "Plus Jakarta Sans", sans-serif;
@@ -42,7 +42,7 @@ h3 { font-size: clamp(1.25rem, 2vw, 1.6rem); letter-spacing: -0.015em; }
 .skip { position: fixed; left: 12px; top: -60px; z-index: 99; background: var(--green); color: var(--green-ink); padding: 10px 14px; border-radius: 10px; }
 .skip:focus { top: 12px; }
 .g { color: var(--green); }
-.a { color: var(--amber); }
+.a { color: var(--hazard); }
 
 /* Header */
 .hdr { position: sticky; top: 0; z-index: 50; background: rgba(5, 5, 5, 0.72); backdrop-filter: blur(14px); border-bottom: 1px solid transparent; transition: border-color .3s; }
@@ -91,10 +91,10 @@ section { padding: clamp(72px, 10vw, 128px) 0; position: relative; }
 /* Duel: Ingenio vs Hazard — appears in every section */
 .duel { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; border-radius: var(--radius); overflow: hidden; background: var(--line); }
 .duel > div { padding: clamp(24px, 3vw, 40px); background: var(--deep); position: relative; }
-.duel .hz { background: radial-gradient(120% 90% at 0% 0%, rgba(255,181,71,.12), transparent 60%), var(--deep); }
+.duel .hz { background: radial-gradient(120% 90% at 0% 0%, rgba(255, 59, 92,.12), transparent 60%), var(--deep); }
 .duel .in { background: radial-gradient(120% 90% at 100% 0%, rgba(0, 230, 118,.14), transparent 60%), var(--deep); }
 .duel strong { display: flex; align-items: center; gap: 10px; font: 700 1.1rem/1.2 var(--display); margin-bottom: 10px; }
-.duel .hz strong { color: var(--amber); }
+.duel .hz strong { color: var(--hazard); }
 .duel .in strong { color: var(--green); }
 .duel p { margin: 0; }
 .duel.mini > div { padding: 18px 20px; }
@@ -102,7 +102,7 @@ section { padding: clamp(72px, 10vw, 128px) 0; position: relative; }
 .duel.mini p { font-size: .95rem; }
 @media (max-width: 680px) { .duel { grid-template-columns: 1fr; } }
 .dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
-.hz .dot { background: var(--amber); box-shadow: 0 0 12px var(--amber); }
+.hz .dot { background: var(--hazard); box-shadow: 0 0 12px var(--hazard); }
 .in .dot { background: var(--green); box-shadow: 0 0 12px var(--green); }
 
 /* Characters */
@@ -113,24 +113,24 @@ section { padding: clamp(72px, 10vw, 128px) 0; position: relative; }
 .char figure img { width: 100%; height: 100%; object-fit: cover; }
 .char .body { padding: clamp(24px, 3vw, 36px); }
 .char.in { box-shadow: 0 30px 80px -40px rgba(0, 230, 118,.45); }
-.char.hz { box-shadow: 0 30px 80px -40px rgba(255,181,71,.35); }
+.char.hz { box-shadow: 0 30px 80px -40px rgba(255, 59, 92,.35); }
 .char h3 { font-size: clamp(2rem, 4vw, 3rem); }
 .char.in h3 { color: var(--green); }
-.char.hz h3 { color: var(--amber); }
+.char.hz h3 { color: var(--hazard); }
 .tags { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 16px 0 0; list-style: none; }
 .tags li { padding: 6px 12px; border-radius: 999px; font-size: .88rem; border: 1px solid var(--line); color: var(--soft); }
-.hz .tags li { border-color: rgba(255,181,71,.3); }
-.in .tags li { border-color: rgba(0, 230, 118,.3); }
+.hz .tags li, .tags.hz li { border-color: rgba(255, 59, 92,.3); }
+.in .tags li, .tags.in li { border-color: rgba(0, 230, 118,.3); }
 
 /* Hazard placeholder — sostituire con l'illustrazione ufficiale */
-.hazard-ph { display: grid; place-items: center; text-align: center; height: 100%; min-height: 220px; padding: 24px; color: rgba(255,181,71,.8); font-size: .9rem; background:
-  repeating-linear-gradient(135deg, rgba(255,181,71,.06) 0 14px, transparent 14px 28px), radial-gradient(circle at 50% 45%, rgba(255,181,71,.18), transparent 60%), #0d0b06; border: 1px dashed rgba(255,181,71,.35); }
+.hazard-ph { display: grid; place-items: center; text-align: center; height: 100%; min-height: 220px; padding: 24px; color: rgba(255, 59, 92,.8); font-size: .9rem; background:
+  repeating-linear-gradient(135deg, rgba(255, 59, 92,.06) 0 14px, transparent 14px 28px), radial-gradient(circle at 50% 45%, rgba(255, 59, 92,.18), transparent 60%), #0d0607; border: 1px dashed rgba(255, 59, 92,.35); }
 .hazard-ph svg { width: 56px; height: 56px; margin: 0 auto 10px; }
 
 /* Big quote */
 .manifesto { text-align: center; }
 .manifesto p { font: 700 clamp(1.8rem, 4.4vw, 3.4rem)/1.1 var(--display); letter-spacing: -0.03em; color: var(--text); max-width: 22ch; margin: 0 auto; text-wrap: balance; }
-.manifesto .hz-word { color: var(--amber); }
+.manifesto .hz-word { color: var(--hazard); }
 .manifesto .in-word { color: var(--green); }
 
 /* Service rows */
@@ -196,7 +196,7 @@ section { padding: clamp(72px, 10vw, 128px) 0; position: relative; }
 .kid-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
 .kid-card { padding: 28px; border-radius: 24px; background: var(--deep); border: 2px dashed var(--line); }
 .kid-card svg { width: 44px; height: 44px; color: var(--green); margin-bottom: 14px; }
-.kid-card .state { display: inline-block; margin-top: 8px; padding: 4px 12px; border-radius: 999px; font-size: .82rem; background: rgba(255,181,71,.12); color: var(--amber); }
+.kid-card .state { display: inline-block; margin-top: 8px; padding: 4px 12px; border-radius: 999px; font-size: .82rem; background: rgba(255, 59, 92,.12); color: var(--hazard); }
 
 /* Contact */
 .form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: clamp(24px, 3vw, 40px); border-radius: var(--radius); background: var(--deep); border: 1px solid var(--line); }
@@ -204,7 +204,7 @@ section { padding: clamp(72px, 10vw, 128px) 0; position: relative; }
 .form .full { grid-column: 1 / -1; }
 .form input, .form select, .form textarea { min-height: 48px; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--night); color: var(--text); font: inherit; }
 .form input:focus, .form select:focus, .form textarea:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(0, 230, 118,.2); }
-.form input:user-invalid { border-color: var(--amber); }
+.form input:user-invalid { border-color: var(--hazard); }
 .form .privacy { display: flex; gap: 10px; align-items: flex-start; grid-column: 1 / -1; }
 .form .privacy input { min-height: auto; margin-top: 4px; accent-color: var(--green); }
 @media (max-width: 600px) { .form { grid-template-columns: 1fr; } }
@@ -315,14 +315,14 @@ h2 { font-weight: 700; }
 .svc::before, .news a::before, .steps li::after, .kid-card::before, .char::before { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0, 230, 118, 0.05), transparent); opacity: 0; transition: opacity .4s ease; pointer-events: none; }
 .svc:hover, .news a:hover, .steps li:hover, .kid-card:hover, .char.in:hover { transform: translateY(-10px); box-shadow: var(--glow-green); border-color: rgba(0, 230, 118, 0.2); }
 .svc:hover::before, .news a:hover::before, .steps li:hover::after, .kid-card:hover::before, .char:hover::before { opacity: 1; }
-.char.hz:hover { border-color: rgba(255, 181, 71, 0.25); }
+.char.hz:hover { border-color: rgba(255, 59, 92, 0.25); }
 .svc div, .steps li, .kid-card, .news div, .char .body { padding: 30px; }
 .svc h3, .news h3, .steps h3, .kid-card h3 { font-size: 22px; }
 .char.in, .char.hz { box-shadow: none; }
 .kid-card { border-style: solid; }
 .duel { background: none; gap: 16px; overflow: visible; }
 .duel > div { border-radius: var(--radius); }
-.duel .hz { background: radial-gradient(120% 90% at 0% 0%, rgba(255,181,71,.08), transparent 60%), var(--card); }
+.duel .hz { background: radial-gradient(120% 90% at 0% 0%, rgba(255, 59, 92,.08), transparent 60%), var(--card); }
 .duel .in { background: radial-gradient(120% 90% at 100% 0%, rgba(0,230,118,.08), transparent 60%), var(--card); }
 .steps li::before { width: 60px; height: 60px; background: rgba(0, 230, 118, 0.1); color: var(--green); font-size: 20px; box-shadow: none; transition: box-shadow .3s; }
 .steps li:hover::before { box-shadow: 0 0 15px rgba(0, 230, 118, 0.4); }
@@ -348,3 +348,16 @@ section:nth-of-type(even):not(.hero):not(.cta):not(.manifesto) { background: #08
 .nl button { font-family: var(--body); font-size: 12px; font-weight: 600; letter-spacing: 1px; }
 .social a:hover { box-shadow: 0 0 10px rgba(0, 230, 118, .5); }
 @media (max-width: 760px) { .hero::after, .hero-home::after { background: linear-gradient(0deg, var(--night) 15%, rgba(5,5,5,.8) 60%, rgba(5,5,5,.55)); } }
+
+/* Liquid Glass: vetro nero con tinta verde acqua. Questo è il fallback sfocato; js/liquid-glass.js aggiunge la rifrazione su Chromium. */
+.glass, .hero-duel .duel > div { background: linear-gradient(135deg, rgba(29, 233, 182, 0.10), rgba(10, 10, 10, 0.55) 45%, rgba(29, 233, 182, 0.06)); -webkit-backdrop-filter: blur(14px) saturate(1.6); backdrop-filter: blur(14px) saturate(1.6); border: 1px solid rgba(29, 233, 182, 0.28); box-shadow: inset 0 1px 0 rgba(29, 233, 182, 0.35), inset 0 0 18px rgba(29, 233, 182, 0.08), 0 10px 30px rgba(0, 0, 0, 0.35); }
+.hdr.scrolled .wrap { border-color: rgba(29, 233, 182, 0.45); }
+/* Vetro di Hazard: stessa ricetta, tinta rossa */
+.hero-duel .duel > .hz { background: linear-gradient(135deg, rgba(255, 59, 92, 0.12), rgba(10, 10, 10, 0.55) 45%, rgba(255, 59, 92, 0.06)); border-color: rgba(255, 59, 92, 0.32); box-shadow: inset 0 1px 0 rgba(255, 59, 92, 0.4), inset 0 0 18px rgba(255, 59, 92, 0.1), 0 10px 30px rgba(0, 0, 0, 0.35); }
+
+/* Luce mobile sul vetro: --la angolo del riflesso, --li intensità, --mx/--my punto di luce (aggiornati da main.js) */
+.glass, .hero-duel .duel > div { --tint: 29, 233, 182; --la: -60deg; --li: 0.5; --mx: 30%; --my: 0%; position: relative; isolation: isolate; }
+.hero-duel .duel > .hz { --tint: 255, 59, 92; }
+.glass::before, .hero-duel .duel > div::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; background: radial-gradient(220px circle at var(--mx) var(--my), rgba(var(--tint), calc(0.22 * var(--li))), transparent 70%); }
+.glass::after, .hero-duel .duel > div::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px; pointer-events: none; background: conic-gradient(from var(--la), rgba(var(--tint), var(--li)) 0%, rgba(var(--tint), calc(0.55 * var(--li))) 7%, rgba(var(--tint), calc(0.15 * var(--li))) 16%, rgba(var(--tint), 0) 26%, rgba(var(--tint), 0) 36%, rgba(var(--tint), calc(0.12 * var(--li))) 43%, rgba(var(--tint), calc(0.4 * var(--li))) 50%, rgba(var(--tint), calc(0.12 * var(--li))) 57%, rgba(var(--tint), 0) 64%, rgba(var(--tint), 0) 74%, rgba(var(--tint), calc(0.15 * var(--li))) 84%, rgba(var(--tint), calc(0.55 * var(--li))) 93%, rgba(var(--tint), var(--li)) 100%); filter: blur(0.7px); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+.nav { z-index: 1; }

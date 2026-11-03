@@ -16,6 +16,58 @@
   burger.addEventListener("click", function () { setMenu(burger.getAttribute("aria-expanded") !== "true"); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") setMenu(false); });
 
+  // Liquid Glass: solo su Chromium e se l'utente non chiede meno movimento o trasparenza
+  var isChromium = navigator.userAgentData && navigator.userAgentData.brands.some(function (b) { return /Chromium/.test(b.brand); });
+  var calm = matchMedia("(prefers-reduced-motion: reduce), (prefers-reduced-transparency: reduce)").matches;
+  if (isChromium && !calm && window.liquidGlass) {
+    document.querySelectorAll(".glass, .hero-duel .duel > div").forEach(function (el) {
+      window.liquidGlass(el, el.classList.contains("hz") ? { tint: [255, 59, 92] } : {}); // vetro di Hazard: riflesso rosso
+    });
+  }
+
+  // Luce sul vetro: segue il puntatore (desktop) o l'inclinazione del telefono (mobile)
+  var glasses = Array.from(document.querySelectorAll(".glass, .hero-duel .duel > div"));
+  var still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var frame = 0, tilting = false;
+  function light(fn) {
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(function () { glasses.forEach(fn); });
+  }
+  if (glasses.length && !still) {
+    window.addEventListener("pointermove", function (e) {
+      if (e.pointerType !== "mouse" || tilting) return; // se c'è il giroscopio comanda lui
+      light(function (el) {
+        var r = el.getBoundingClientRect();
+        var dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+        // conic-gradient parte dall'alto e gira in senso orario; la luce punta verso il mouse
+        el.style.setProperty("--la", (Math.atan2(dx, -dy) * 180 / Math.PI - 40) + "deg");
+        el.style.setProperty("--li", Math.max(0.25, Math.min(1, 1 - Math.hypot(dx, dy) / 700)).toFixed(2));
+        el.style.setProperty("--mx", (e.clientX - r.left) + "px");
+        el.style.setProperty("--my", (e.clientY - r.top) + "px");
+      });
+    }, { passive: true });
+
+    var tilt = function (e) {
+      if (e.beta === null) return;
+      tilting = true;
+      var x = Math.max(-45, Math.min(45, e.gamma)), y = Math.max(-45, Math.min(45, e.beta - 45)); // 45° = telefono tenuto in mano
+      light(function (el) {
+        el.style.setProperty("--la", (Math.atan2(x, -y) * 180 / Math.PI - 40) + "deg");
+        el.style.setProperty("--li", Math.max(0.3, Math.min(1, Math.hypot(x, y) / 45)).toFixed(2));
+        el.style.setProperty("--mx", (50 + x) + "%");
+        el.style.setProperty("--my", (50 + y) + "%");
+      });
+    };
+    window.addEventListener("deviceorientation", tilt);
+    if (window.DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission === "function") {
+      // iPhone: senza permesso non arrivano dati; va chiesto dopo un tocco
+      window.addEventListener("touchend", function ask() {
+        window.removeEventListener("touchend", ask);
+        DeviceOrientationEvent.requestPermission().catch(function () {});
+      });
+    }
+  }
+
   // Filtro corsi (pagina Formazione)
   var list = document.getElementById("courses");
   if (list) {
