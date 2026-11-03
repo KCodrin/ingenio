@@ -361,3 +361,18 @@ section:nth-of-type(even):not(.hero):not(.cta):not(.manifesto) { background: #08
 .glass::before, .hero-duel .duel > div::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; background: radial-gradient(220px circle at var(--mx) var(--my), rgba(var(--tint), calc(0.22 * var(--li))), transparent 70%); }
 .glass::after, .hero-duel .duel > div::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px; pointer-events: none; background: radial-gradient(320px circle at var(--mx) var(--my), rgba(var(--tint), var(--li)), rgba(var(--tint), calc(0.4 * var(--li))) 30%, rgba(var(--tint), calc(0.1 * var(--li))) 60%, rgba(var(--tint), 0) 85%), linear-gradient(calc(var(--la) + 220deg), rgba(var(--tint), 0) 30%, rgba(var(--tint), calc(0.35 * var(--li))) 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
 .nav { z-index: 1; }
+
+/* Pagine servizio: lettura verticale con passi numerati su una linea */
+.svc-page { max-width: 820px; }
+.svc-page > p { font-size: 1.05rem; }
+.svc-part { margin-top: 72px; padding-top: 48px; border-top: 1px solid var(--line); }
+.svc-part:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+.svc-group { margin: 56px 0 8px; font-size: 1.5rem; color: var(--green); }
+.vsteps { list-style: none; counter-reset: v; margin: 40px 0; padding: 0 0 0 28px; border-left: 2px solid rgba(0, 230, 118, 0.25); }
+.vsteps li { position: relative; counter-increment: v; margin: 0 0 20px; padding: 26px 30px; border-radius: var(--radius); background: var(--card); border: 1px solid var(--line); }
+.vsteps li::before { content: counter(v); position: absolute; left: -48px; top: 24px; width: 38px; height: 38px; display: grid; place-items: center; border-radius: 50%; background: var(--night); border: 2px solid var(--green); color: var(--green); font-weight: 700; box-shadow: 0 0 12px rgba(0, 230, 118, 0.35); }
+.vsteps h3 { font-size: 1.25rem; margin-bottom: 8px; }
+.vsteps p { margin: 0; }
+.notice { margin: 40px 0; padding: 32px; border-radius: var(--radius); background: var(--card); border: 1px dashed rgba(0, 230, 118, 0.35); }
+.notice h2 { font-size: 1.6rem; }
+@media (max-width: 560px) { .vsteps { padding-left: 22px; } .vsteps li { padding: 22px; } .vsteps li::before { left: -42px; width: 34px; height: 34px; } }
