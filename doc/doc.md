@@ -42,4 +42,4 @@ Home, Ingenio & Hazard, Servizi, Formazione (catalogo di 58 corsi con ricerca e 
 - Generare le pagine: `python3 -I tools/build.py .` (dalla cartella `INGENIO/`)
 - Avvio in locale: `python3 -m http.server 8765 --directory "Nuovo sito"` → `http://localhost:8765`
 - Test: nessun test automatico; controllo a schermo desktop e mobile.
-- Pubblicazione: repository GitHub `KCodrin/ingenio`, ramo `main`. Hosting definitivo: da confermare.
+- Pubblicazione: repository GitHub `KCodrin/ingenio`, ramo `main`, collegato a Vercel; `vercel.json` pubblica la cartella `Nuovo sito/`. Dominio definitivo: da confermare.

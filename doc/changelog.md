@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-11-03 · Configurazione per Vercel
+**Cosa:** aggiunto `vercel.json` che dice a Vercel di pubblicare la cartella `Nuovo sito/`.
+**Perché / Dettagli:** Vercel pubblicava la radice del repository, dove non c'è `index.html`, e rispondeva "404 NOT_FOUND".
+**Verifica:** non ancora verificata online: serve un nuovo deploy dopo il push.
+
 ## 2026-11-03 · Template Crafto escluso da GitHub
 **Cosa:** la cartella `PER IL DESIGN/` (template Crafto, 22 MB) non viene caricata su GitHub.
 **Perché / Dettagli:** è un template commerciale di terzi usato solo come riferimento di stile; aggiunto a `.gitignore`.
