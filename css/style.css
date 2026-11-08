@@ -449,3 +449,9 @@ section:nth-of-type(even):not(.hero):not(.cta):not(.manifesto) { background: #08
 @media (max-width: 760px) {
   .hero-home > img { inset: auto 0 0 0; height: calc(100svh - 290px); min-height: 360px; -webkit-mask: linear-gradient(transparent, #000 14%, #000 85%, transparent); mask: linear-gradient(transparent, #000 14%, #000 85%, transparent); }
 }
+/* Desktop: ai lati meno nero. Sfumatura laterale più corta e un alone verde scuro dietro l'immagine che ne continua i bordi */
+@media (min-width: 761px) {
+  .hero-home { background: radial-gradient(ellipse 75% 70% at 50% 72%, rgba(6, 70, 32, 0.75), rgba(4, 40, 20, 0.35) 55%, transparent 85%), var(--night); }
+  .hero-home > img { -webkit-mask: linear-gradient(transparent, #000 14%, #000 85%, transparent), linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); -webkit-mask-composite: source-in;
+    mask: linear-gradient(transparent, #000 14%, #000 85%, transparent), linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); mask-composite: intersect; }
+}
