@@ -86,6 +86,13 @@
       empty.hidden = shown > 0;
     };
     q.addEventListener("input", apply);
+    // Arrivo da Chi siamo (formazione.html#soft ecc.): filtro per percorso, o ricerca se non esiste il filtro (es. #marketing)
+    var want = decodeURIComponent(location.hash.slice(1));
+    if (want) {
+      var chip = chips.find(function (c) { return c.dataset.track === want; });
+      if (chip) { setTimeout(function () { chip.click(); }); } else { q.value = want; apply(); }
+      setTimeout(function () { document.querySelector(".course-tools").scrollIntoView(); }, 50);
+    }
     chips.forEach(function (c) {
       c.addEventListener("click", function () {
         track = c.dataset.track;
