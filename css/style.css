@@ -469,3 +469,16 @@ section:nth-of-type(even):not(.hero):not(.cta):not(.manifesto) { background: #08
     -webkit-mask: linear-gradient(transparent, #000 14%, #000 85%, transparent), linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); -webkit-mask-composite: source-in;
     mask: linear-gradient(transparent, #000 14%, #000 85%, transparent), linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); mask-composite: intersect; }
 }
+
+/* Catalogo corsi a lista: una riga per corso, nome a sinistra e ore a destra */
+.courses { grid-template-columns: 1fr; gap: 0; border-top: 1px solid rgba(255, 255, 255, 0.08); }
+.courses li { padding: 16px 8px; border: 0; border-bottom: 1px solid rgba(255, 255, 255, 0.08); border-radius: 0; background: none; transition: background .2s; }
+.courses li:hover { background: rgba(0, 230, 118, 0.04); }
+/* Corsi con più livelli: una riga con l'etichetta "3 livelli" e i livelli affiancati */
+.courses li.multi { flex-wrap: wrap; align-items: center; gap: 10px 24px; }
+.courses .cname { display: flex; align-items: center; gap: 12px; }
+.courses .cname em { font-style: normal; font-size: 12px; font-weight: 600; letter-spacing: .5px; padding: 3px 10px; border-radius: 999px; color: var(--green); background: rgba(0, 230, 118, 0.1); border: 1px solid rgba(0, 230, 118, 0.25); white-space: nowrap; }
+.courses .levels { display: flex; flex-wrap: wrap; gap: 8px; }
+.courses .lv { display: inline-flex; gap: 8px; align-items: baseline; padding: 6px 12px; border-radius: 10px; font-size: 14px; color: var(--soft); background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); }
+.courses .lv b { color: var(--green); font-weight: 600; font-variant-numeric: tabular-nums; }
+.courses li.multi > .levels span { white-space: nowrap; }
