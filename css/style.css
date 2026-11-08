@@ -460,3 +460,12 @@ section:nth-of-type(even):not(.hero):not(.cta):not(.manifesto) { background: #08
   .hero-home > img { inset: auto 0 0 0; left: 0; transform: none; width: 100%; height: calc(100svh - 260px); object-fit: cover; object-position: center bottom;
     -webkit-mask: linear-gradient(transparent, #000 14%, #000 85%, transparent); mask: linear-gradient(transparent, #000 14%, #000 85%, transparent); }
 }
+/* Regola unica per tutti gli schermi sopra 760px: l'immagine occupa lo spazio sotto il testo (alta 100svh - 150px).
+   Larghezza al massimo 16:9 dell'altezza: su schermi stretti/alti si ritaglia ai lati, su schermi larghi resta intera e centrata.
+   La testa di Ingenio sta al 25% dell'immagine, quindi resta sempre sotto il testo. */
+@media (min-width: 761px) {
+  .hero-home > img { inset: auto auto 0 50%; transform: translateX(-50%); height: calc(100svh - 150px); width: min(100%, calc((100svh - 150px) * 1.7778));
+    object-fit: cover; object-position: center bottom;
+    -webkit-mask: linear-gradient(transparent, #000 14%, #000 85%, transparent), linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); -webkit-mask-composite: source-in;
+    mask: linear-gradient(transparent, #000 14%, #000 85%, transparent), linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); mask-composite: intersect; }
+}
