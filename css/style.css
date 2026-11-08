@@ -299,11 +299,6 @@ h2 { font-weight: 700; }
 .hero-home .lead { margin-inline: auto; }
 .hero-home .actions { justify-content: center; }
 .hero::after { background: linear-gradient(90deg, var(--night) 10%, rgba(5,5,5,.6) 55%, rgba(5,5,5,.15)), linear-gradient(0deg, var(--night), transparent 30%); }
-.stats { display: inline-flex; flex-wrap: wrap; justify-content: center; margin: 48px 0 0; padding: 0; list-style: none; border: 1px solid rgba(255,255,255,.08); border-radius: 10px; background: rgba(10,10,10,.6); backdrop-filter: blur(6px); }
-.stats li { padding: 12px 28px; font-size: 15px; color: var(--soft); }
-.stats li + li { border-left: 1px solid rgba(255,255,255,.08); }
-.stats b { color: var(--green); font-size: 18px; font-weight: 700; margin-right: 4px; }
-@media (max-width: 600px) { .stats li + li { border-left: 0; border-top: 1px solid rgba(255,255,255,.08); } .stats li { width: 100%; } }
 .manifesto { overflow: hidden; }
 .ghost { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font: 800 clamp(5rem, 16vw, 15rem)/1 var(--display); letter-spacing: -0.05em; color: rgba(0, 230, 118, .04); white-space: nowrap; pointer-events: none; }
 .manifesto .wrap { position: relative; }
@@ -376,3 +371,15 @@ section:nth-of-type(even):not(.hero):not(.cta):not(.manifesto) { background: #08
 .notice { margin: 40px 0; padding: 32px; border-radius: var(--radius); background: var(--card); border: 1px dashed rgba(0, 230, 118, 0.35); }
 .notice h2 { font-size: 1.6rem; }
 @media (max-width: 560px) { .vsteps { padding-left: 22px; } .vsteps li { padding: 22px; } .vsteps li::before { left: -42px; width: 34px; height: 34px; } }
+
+/* Hero home: l'immagine ha Ingenio al centro, quindi resta libera in alto e il testo parte sotto, sulla sfumatura */
+.hero-home { display: block; min-height: 0; padding: 0 0 72px; }
+.hero-home > img { position: relative; inset: auto; z-index: 0; display: block; width: 100%; height: min(78svh, 56.25vw); object-fit: cover; object-position: center 35%; -webkit-mask: linear-gradient(#000 70%, transparent); mask: linear-gradient(#000 70%, transparent); }
+.hero-home::after { display: none; }
+.hero-home > .wrap { position: relative; z-index: 1; margin-top: -7vw; }
+@media (max-width: 760px) { .hero-home > img { height: clamp(340px, 56.25vw, 62svh); object-position: 50% 30%; } .hero-home > .wrap { margin-top: -48px; } }
+/* Testo, sottotitolo e pulsante sopra la testa di Ingenio: il testo viene prima, l'immagine sotto */
+.hero-home { display: flex; flex-direction: column; padding: 130px 0 40px; }
+.hero-home > .wrap { order: 1; margin-top: 0; }
+.hero-home > img { order: 2; margin-top: -20px; -webkit-mask: linear-gradient(transparent, #000 18%, #000 75%, transparent); mask: linear-gradient(transparent, #000 18%, #000 75%, transparent); }
+@media (max-width: 760px) { .hero-home { padding-top: 110px; } .hero-home > .wrap { margin-top: 0; } .hero-home > img { margin-top: 0; } }
