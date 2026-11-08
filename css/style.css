@@ -431,3 +431,21 @@ section:nth-of-type(even):not(.hero):not(.cta):not(.manifesto) { background: #08
   .hero-bar .btn { padding: 0 14px; font-size: 12px; }
   .hero-sub-line { font-size: 0.92rem; }
 }
+
+/* Hero home: l'immagine (con spazio libero in alto) fa da sfondo a tutto schermo; il testo sta sopra la testa di Ingenio */
+.hero-home { display: block; height: 100svh; min-height: 620px; padding: 104px 0 0; }
+.hero-home > img { position: absolute; inset: 0; z-index: 0; flex: none; width: 100%; max-width: none; height: 100%; margin: 0; object-fit: cover; object-position: center bottom;
+  -webkit-mask: linear-gradient(#000 82%, transparent); mask: linear-gradient(#000 82%, transparent); }
+.hero-home > .wrap { position: relative; z-index: 1; }
+.hero-home h1 { max-width: none; }
+@media (min-width: 900px) { .hero-home h1 { white-space: nowrap; } }
+@media (max-width: 760px) { .hero-home > img { width: 100%; object-fit: cover; object-position: center bottom; -webkit-mask: linear-gradient(#000 85%, transparent); mask: linear-gradient(#000 85%, transparent); } }
+/* L'immagine è ancorata in basso e alta quanto serve perché la testa di Ingenio (25% dall'alto dell'immagine) resti sotto il testo */
+@media (min-width: 761px) {
+  .hero-home > img { inset: auto; bottom: 0; left: 50%; transform: translateX(-50%); width: auto; height: min(56.25vw, calc(100svh - 150px)); object-fit: contain;
+    -webkit-mask: linear-gradient(transparent, #000 14%, #000 85%, transparent), linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); -webkit-mask-composite: source-in;
+    mask: linear-gradient(transparent, #000 14%, #000 85%, transparent), linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-composite: intersect; }
+}
+@media (max-width: 760px) {
+  .hero-home > img { inset: auto 0 0 0; height: calc(100svh - 290px); min-height: 360px; -webkit-mask: linear-gradient(transparent, #000 14%, #000 85%, transparent); mask: linear-gradient(transparent, #000 14%, #000 85%, transparent); }
+}
