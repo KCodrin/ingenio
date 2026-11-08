@@ -455,3 +455,8 @@ section:nth-of-type(even):not(.hero):not(.cta):not(.manifesto) { background: #08
   .hero-home > img { -webkit-mask: linear-gradient(transparent, #000 14%, #000 85%, transparent), linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); -webkit-mask-composite: source-in;
     mask: linear-gradient(transparent, #000 14%, #000 85%, transparent), linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); mask-composite: intersect; }
 }
+/* Schermi larghi ma alti (finestra stretta, tablet in verticale): l'immagine riempie lo spazio sotto il testo, ritagliata ai lati, come su telefono */
+@media (min-width: 761px) and (max-aspect-ratio: 1/1) {
+  .hero-home > img { inset: auto 0 0 0; left: 0; transform: none; width: 100%; height: calc(100svh - 260px); object-fit: cover; object-position: center bottom;
+    -webkit-mask: linear-gradient(transparent, #000 14%, #000 85%, transparent); mask: linear-gradient(transparent, #000 14%, #000 85%, transparent); }
+}
