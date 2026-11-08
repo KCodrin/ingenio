@@ -33,7 +33,7 @@ img { display: block; max-width: 100%; height: auto; }
 a { color: inherit; }
 p { margin: 0 0 1em; color: var(--soft); max-width: 65ch; }
 h1, h2, h3 { font-family: var(--display); line-height: 1.02; letter-spacing: -0.035em; margin: 0 0 0.4em; text-wrap: balance; font-weight: 600; }
-h1 { font-size: clamp(2.8rem, 6vw, 5rem); }
+h1 { font-size: clamp(2.4rem, 4.8vw, 4rem); }
 h2 { font-size: clamp(2rem, 3.6vw, 2.85rem); }
 h3 { font-size: clamp(1.25rem, 2vw, 1.6rem); letter-spacing: -0.015em; }
 :focus-visible { outline: 3px solid var(--green); outline-offset: 3px; border-radius: 6px; }
@@ -86,7 +86,7 @@ section { padding: clamp(72px, 10vw, 128px) 0; position: relative; }
 .hero h1 { max-width: 11ch; }
 .hero .quote { margin-top: 32px; font-family: var(--display); font-size: 1.15rem; color: var(--text); }
 .hero-sub { min-height: 62svh; }
-.hero-sub h1 { font-size: clamp(2.4rem, 6vw, 4.6rem); }
+.hero-sub h1 { font-size: clamp(2.2rem, 4.4vw, 3.6rem); }
 
 /* Duel: Ingenio vs Hazard — appears in every section */
 .duel { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; border-radius: var(--radius); overflow: hidden; background: var(--line); }
@@ -383,3 +383,18 @@ section:nth-of-type(even):not(.hero):not(.cta):not(.manifesto) { background: #08
 .hero-home > .wrap { order: 1; margin-top: 0; }
 .hero-home > img { order: 2; margin-top: -20px; -webkit-mask: linear-gradient(transparent, #000 18%, #000 75%, transparent); mask: linear-gradient(transparent, #000 18%, #000 75%, transparent); }
 @media (max-width: 760px) { .hero-home { padding-top: 110px; } .hero-home > .wrap { margin-top: 0; } .hero-home > img { margin-top: 0; } }
+
+/* Hero home in una sola schermata: testo in alto, l'immagine riempie lo spazio che resta (intera su desktop, ritagliata ai lati su telefono) */
+.hero-home { height: 100svh; min-height: 600px; padding: 104px 0 0; }
+.hero-home > .wrap { flex: none; }
+.hero-home h1 { margin-bottom: 0.25em; }
+.hero-home .actions { margin-top: 20px; }
+.hero-home > img { flex: 1 1 0; min-height: 0; height: auto; margin-top: 8px; object-fit: contain; object-position: center bottom;
+  -webkit-mask: linear-gradient(transparent, #000 14%, #000 82%, transparent), linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent); -webkit-mask-composite: source-in;
+  mask: linear-gradient(transparent, #000 14%, #000 82%, transparent), linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent); mask-composite: intersect; }
+@media (max-width: 760px) {
+  .hero-home { padding-top: 96px; }
+  .hero-home > img { height: auto; object-fit: cover; object-position: 50% 35%; -webkit-mask: linear-gradient(transparent, #000 12%, #000 80%, transparent); mask: linear-gradient(transparent, #000 12%, #000 80%, transparent); }
+}
+.hero-home > img { width: auto; max-width: 100%; align-self: center; }
+@media (max-width: 760px) { .hero-home > img { width: 100%; align-self: stretch; } }
