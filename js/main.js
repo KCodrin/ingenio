@@ -102,3 +102,9 @@
     });
   }
 })();
+
+// Footer: su telefono le sezioni partono chiuse (fisarmonica); su desktop restano aperte
+const ftrAcc = document.querySelectorAll('.ftr-acc');
+const ftrMq = matchMedia('(max-width: 760px)');
+const ftrSet = () => ftrAcc.forEach(d => { d.open = !ftrMq.matches; });
+ftrSet(); ftrMq.addEventListener('change', ftrSet);

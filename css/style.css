@@ -569,3 +569,35 @@ main > section.article-head:first-child { padding-top: 128px; }
 
 /* Spazio in fondo alla pagina per il pulsante fisso "Parla con Ingenio": l'ultima riga resta leggibile sopra di lui */
 body { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
+
+/* Footer: su desktop colonne sempre aperte; su telefono ogni sezione è una fisarmonica */
+.ftr-acc summary { list-style: none; }
+.ftr-acc summary::-webkit-details-marker { display: none; }
+@media (min-width: 761px) { .ftr-acc summary { pointer-events: none; } }
+@media (max-width: 760px) {
+  .ftr .grid { gap: 0; }
+  .ftr .grid > div { margin-bottom: 24px; }
+  .ftr-acc { border-top: 1px solid var(--line); }
+  .ftr-acc:last-child { border-bottom: 1px solid var(--line); }
+  .ftr-acc summary { display: flex; justify-content: space-between; align-items: center; min-height: 56px; cursor: pointer; }
+  .ftr-acc summary h2 { margin: 0; padding: 0; }
+  .ftr-acc summary h2::after { display: none; }
+  .ftr-acc summary::after { content: ""; width: 10px; height: 10px; margin-right: 4px; border-right: 2px solid var(--green); border-bottom: 2px solid var(--green); transform: rotate(45deg) translateY(-3px); transition: transform .3s var(--ease); }
+  .ftr-acc[open] summary::after { transform: rotate(-135deg) translateY(-3px); }
+  .ftr-acc > :not(summary) { padding-bottom: 20px; }
+}
+
+/* Fondo del footer: dati societari, nota legale, credits */
+.ftr .bottom p { margin: 0 auto; max-width: 72ch; }
+.ftr .bottom p { font-size: 10px; line-height: 1.6; }
+.ftr .bottom .legal-id { color: var(--soft); }
+.ftr .bottom .legal-note { margin-top: 6px; color: rgba(255,255,255,.5); }
+.ftr .bottom .legal-credits { margin-top: 16px; font-size: var(--fs-small); color: var(--soft); }
+
+/* Banner consenso cookie (js/consent.js) */
+.consent { position: fixed; left: 50%; bottom: 84px; transform: translateX(-50%); z-index: 2147483647; width: min(560px, calc(100% - 32px)); display: flex; align-items: center; gap: 16px; padding: 16px 16px 16px 20px; border-radius: var(--radius); background: rgba(10,10,10,.92); border: 1px solid var(--line); backdrop-filter: blur(12px); }
+.consent p { margin: 0; font-size: var(--fs-small); line-height: 1.5; color: var(--soft); }
+.consent a { color: var(--green); }
+.consent-btns { display: flex; gap: 8px; flex: none; }
+.consent .btn { min-height: 38px; padding: 0 16px; }
+@media (max-width: 560px) { .consent { flex-direction: column; align-items: stretch; } .consent-btns > * { flex: 1; } }
