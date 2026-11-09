@@ -343,6 +343,7 @@
           const a = -240 * (st.p - st.target) - c * st.v;      // rigidità, smorzamento
           st.v += a * dt;
           st.p += st.v * dt;
+          if (st.target === 1 && st.p >= 1) { st.p = 1; st.v = 0; }   // a tutto schermo si ferma: niente rimbalzo che lo fa scendere
           if (Math.abs(st.p - st.target) > 0.0008 || Math.abs(st.v) > 0.01) busy = true;
           else { st.p = st.target; st.v = 0; }
         }
@@ -481,24 +482,7 @@
 
     // (nessun effetto al passaggio del mouse: il pulsante resta fermo finché non lo tocchi)
 
-    // ---- si fa piccolo mentre scorri verso il basso, torna intero se risali o ti fermi ----
-    function setCollapsed(v) {
-      if (collapsed === v || isOpen) return;
-      collapsed = v;
-      dock.classList.toggle('collapsed', v);
-      setClosedTarget();
-      kick();
-    }
-    let lastY = window.scrollY, acc = 0, idleT = 0;
-    window.addEventListener('scroll', () => {
-      if (isOpen) return;
-      const y = window.scrollY, d = y - lastY;
-      lastY = y;
-      if (d > 0) { acc += d; if (acc > 60 && y > 160) setCollapsed(true); }
-      else if (d < 0) { acc = 0; setCollapsed(false); }
-      clearTimeout(idleT);
-      idleT = setTimeout(() => { acc = 0; setCollapsed(false); }, 1100);
-    }, { passive: true });
+    // il pulsante resta sempre intero con la scritta: non si stringe mai a icona (richiesta del cliente)
 
     // ---- testo contestuale in base alla sezione visibile ----
     const sections = [...document.querySelectorAll('[data-cta]')];
@@ -534,18 +518,6 @@
       };
       vv.addEventListener('resize', () => { onVV(); measure(); kick(); });
       vv.addEventListener('scroll', onVV);
-    }
-
-    // ---- in Home il pulsante resta nascosto finché si vede la barra della hero, per non sovrapporsi ----
-    const heroBar = document.querySelector('.hero-bar');
-    if (heroBar && 'IntersectionObserver' in window) {
-      host.style.transition = 'opacity .3s';
-      new IntersectionObserver(([en]) => {
-        const hide = en.isIntersecting && !isOpen;
-        host.style.opacity = hide ? '0' : '1';
-        host.style.pointerEvents = hide ? 'none' : '';
-        host.inert = hide;
-      }).observe(heroBar);
     }
 
     // ---- avvio ----

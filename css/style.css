@@ -404,12 +404,7 @@ section:nth-of-type(even):not(.hero):not(.cta):not(.manifesto) { background: var
 .hero-home { position: relative; padding-top: 112px; }
 .hero-home h1 { margin-bottom: 0; }
 .hero-home > img { margin-top: 0; }
-.hero-bar { order: 3; position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%); z-index: 2; display: flex; align-items: center; gap: 20px; width: max-content; max-width: min(820px, calc(100% - 32px)); padding: 10px 10px 10px 24px; border-radius: 999px; text-align: left; }
-.hero-bar p { margin: 0; font-size: 0.95rem; line-height: 1.45; color: var(--text); }
-.hero-bar .btn { flex: none; }
 @media (max-width: 760px) {
-  .hero-bar { flex-direction: column; gap: 12px; width: calc(100% - 32px); padding: 16px; border-radius: 16px; text-align: center; bottom: 16px; }
-  .hero-bar p { font-size: 0.88rem; }
 }
 
 /* Pulsanti più piccoli in tutto il sito */
@@ -422,13 +417,7 @@ section:nth-of-type(even):not(.hero):not(.cta):not(.manifesto) { background: var
 .hero-home h1 { margin-bottom: -0.14em; }
 /* Barra della hero come quella di Apple: pillola compatta su una riga, ovunque */
 .hero-sub-line { margin: 10px auto 0; max-width: 58ch; font-size: 1rem; line-height: 1.5; color: var(--soft); }
-.hero-bar { gap: 16px; padding: 6px 6px 6px 22px; border-radius: 999px; width: max-content; }
-.hero-bar p { font-size: 0.95rem; white-space: nowrap; }
-.hero-bar .btn { min-height: 38px; border-radius: 999px; }
 @media (max-width: 760px) {
-  .hero-bar { flex-direction: row; width: max-content; max-width: calc(100% - 24px); padding: 5px 5px 5px 16px; gap: 10px; border-radius: 999px; bottom: 18px; }
-  .hero-bar p { font-size: 0.82rem; white-space: normal; text-align: left; }
-  .hero-bar .btn { padding: 0 14px; font-size: 12px; }
   .hero-sub-line { font-size: 0.92rem; }
 }
 
@@ -563,7 +552,7 @@ h3, .svc h3, .news h3, .steps h3, .kid-card h3, .vsteps h3, .svc-group, .notice 
 p, .svc p, .steps p, .news p, .kid-card p, .vsteps p, .duel p, .courses li, .contact-list li, .form label { font-size: var(--fs-body); }
 .lead, .hero-sub .lead, .hero-sub-line, .head .lead { font-size: var(--fs-lead); }
 .article p, .article li { font-size: 18px; }
-.duel.mini p, .hero-sub .duel.mini p, .tags li, .chips a, .chips button, .news time, .courses .lv, .kid-card .state, .ftr .bottom, .hero-bar p { font-size: var(--fs-small); }
+.duel.mini p, .hero-sub .duel.mini p, .tags li, .chips a, .chips button, .news time, .courses .lv, .kid-card .state, .ftr .bottom { font-size: var(--fs-small); }
 .duel strong { font-size: var(--fs-body); }
 .duel.mini strong { font-size: var(--fs-small); }
 .label { font-size: var(--fs-small); }
@@ -571,7 +560,6 @@ p, .svc p, .steps p, .news p, .kid-card p, .vsteps p, .duel p, .courses li, .con
 @media (max-width: 760px) {
   :root { --fs-body: 16px; --fs-lead: 18px; --fs-h3: 20px; --space-head: 36px; }
   .hero.hero-sub { padding: 112px 0 40px; }
-  .hero-bar p { font-size: 13px; }
 }
 .press { padding-top: var(--space-section); padding-bottom: var(--space-section); }
 .svc-page > p { font-size: var(--fs-body); }
