@@ -518,3 +518,63 @@ section:nth-of-type(even):not(.hero):not(.cta):not(.manifesto) { background: #08
   .marquee-track { animation: none; flex-wrap: wrap; justify-content: center; width: auto; }
   .marquee-track li[aria-hidden] { display: none; }
 }
+
+/* =====================================================================
+   SCALA UNICA DI TESTI E SPAZI — vale per tutte le pagine.
+   Ogni elemento dello stesso tipo usa lo stesso valore. Si cambia qui, non nelle pagine.
+   ===================================================================== */
+:root {
+  --fs-small: 15px;                              /* dati, etichette, chip, date, riquadri mini */
+  --fs-body: 17px;                               /* tutto il testo normale, anche nelle card */
+  --fs-lead: 20px;                               /* sottotitoli e frasi introduttive */
+  --fs-h3: 22px;                                 /* titoli di card e passi */
+  --fs-h2: clamp(2rem, 3.4vw, 2.75rem);          /* titoli di sezione */
+  --fs-h1: clamp(2.2rem, 4.2vw, 3.4rem);         /* titolo delle pagine interne e degli articoli */
+  --fs-h1-home: clamp(2.4rem, 4.8vw, 4rem);      /* titolo della Home */
+  --fs-statement: clamp(2rem, 4vw, 3.25rem);     /* frasi manifesto */
+  --space-section: clamp(72px, 8vw, 112px);      /* spazio sopra e sotto ogni sezione */
+  --space-head: 48px;                            /* spazio tra titolo di sezione e contenuto */
+}
+
+/* Spazi */
+main > section { padding-top: var(--space-section); padding-bottom: var(--space-section); }
+.hero.hero-sub { padding: 128px 0 56px; }
+.article-head { padding-bottom: 0; }
+.article-body { padding-top: 32px; }
+.head, .press .head { margin-bottom: var(--space-head); }
+.stack { display: grid; gap: 16px; }
+.split.top { align-items: start; }
+.ratio-43 { aspect-ratio: 4 / 3; }
+.chips.center { justify-content: center; }
+.article-end { margin-top: 48px; }
+.steps.steps-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.ftr-about { margin-top: 16px; }
+.hero-sub .hero-duel { max-width: 620px; margin-top: 24px; }
+
+/* Titoli */
+h1, .hero-sub h1, .article h1 { font-size: var(--fs-h1); }
+.hero-home h1 { font-size: var(--fs-h1-home); }
+h2, .svc-full h2, .svc-part, .char h3, .cta h2 { font-size: var(--fs-h2); }
+.article h2 { font-size: 1.6rem; }
+h3, .svc h3, .news h3, .steps h3, .kid-card h3, .vsteps h3, .svc-group, .notice h2, .ftr h2 { font-size: var(--fs-h3); }
+.manifesto p { font-size: var(--fs-statement); }
+
+/* Testo */
+p, .svc p, .steps p, .news p, .kid-card p, .vsteps p, .duel p, .courses li, .contact-list li, .form label { font-size: var(--fs-body); }
+.lead, .hero-sub .lead, .hero-sub-line, .head .lead { font-size: var(--fs-lead); }
+.article p, .article li { font-size: 18px; }
+.duel.mini p, .hero-sub .duel.mini p, .tags li, .chips a, .chips button, .news time, .courses .lv, .kid-card .state, .ftr .bottom, .hero-bar p { font-size: var(--fs-small); }
+.duel strong { font-size: var(--fs-body); }
+.duel.mini strong { font-size: var(--fs-small); }
+.label { font-size: var(--fs-small); }
+
+@media (max-width: 760px) {
+  :root { --fs-body: 16px; --fs-lead: 18px; --fs-h3: 20px; --space-head: 36px; }
+  .hero.hero-sub { padding: 112px 0 40px; }
+  .hero-bar p { font-size: 13px; }
+}
+.press { padding-top: var(--space-section); padding-bottom: var(--space-section); }
+.svc-page > p { font-size: var(--fs-body); }
+.svc-page > p.lead { font-size: var(--fs-lead); }
+main > section.article-head:first-child { padding-top: 128px; }
+@media (max-width: 760px) { main > section.article-head:first-child { padding-top: 112px; } }
