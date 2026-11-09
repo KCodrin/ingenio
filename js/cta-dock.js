@@ -526,7 +526,6 @@
     closedW = targetClosedW;
     openH = openHT;
     render();
-    if (!reduce) setTimeout(() => { if (!isOpen && !drag && st.p === 0) { st.v = 1.6; kick(); } }, 1900);   // piccolo "saltello" per far capire che è trascinabile
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);

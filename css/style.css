@@ -566,3 +566,6 @@ p, .svc p, .steps p, .news p, .kid-card p, .vsteps p, .duel p, .courses li, .con
 .svc-page > p.lead { font-size: var(--fs-lead); }
 main > section.article-head:first-child { padding-top: 128px; }
 @media (max-width: 760px) { main > section.article-head:first-child { padding-top: 112px; } }
+
+/* Spazio in fondo alla pagina per il pulsante fisso "Parla con Ingenio": l'ultima riga resta leggibile sopra di lui */
+body { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
