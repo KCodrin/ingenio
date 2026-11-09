@@ -1,7 +1,7 @@
 /* Ingenio — stile dalla cartella referenza: nero, verde #00e676, card a vetro. Rosso = Hazard. */
 :root {
-  --night: #050505;
-  --deep: #0a0a0a;
+  --night: #000000;
+  --deep: #000000;
   --panel: rgba(255, 255, 255, 0.05);
   --line: rgba(255, 255, 255, 0.05);
   --text: #ffffff;
@@ -328,7 +328,7 @@ h2 { font-weight: 700; }
 .svc-full ul { padding-left: 0; }
 .svc-full li { list-style: none; position: relative; padding-left: 26px; margin-bottom: 10px; color: var(--text); }
 .svc-full li::before { content: "•"; position: absolute; left: 4px; top: -6px; font-size: 22px; color: var(--green); }
-section:nth-of-type(even):not(.hero):not(.cta):not(.manifesto) { background: #080808; }
+section:nth-of-type(even):not(.hero):not(.cta):not(.manifesto) { background: var(--night); }
 
 /* Fascia finale come la "join section" della referenza */
 .cta .wrap { border-radius: 20px; background: radial-gradient(60% 120% at 50% 0%, rgba(0,230,118,.12), transparent 70%), rgba(255,255,255,.02); border: 1px solid rgba(0, 230, 118, 0.2); box-shadow: 0 15px 30px rgba(0,0,0,.3), 0 0 30px rgba(0,230,118,.1); }
