@@ -74,6 +74,33 @@
     }
   }
 
+  // Home: carosello Ingenio / Hazard
+  document.querySelectorAll("[data-duo]").forEach(function (duo) {
+    var track = duo.querySelector(".duo-track"), slides = Array.from(track.children);
+    var tabs = Array.from(duo.querySelectorAll("[data-go]")), dots = Array.from(duo.querySelectorAll(".duo-dots i"));
+    var play = duo.querySelector("[data-play]"), cur = 0, auto = null;
+    var go = function (i) { i = (i + slides.length) % slides.length; var s = slides[i]; track.scrollTo({ left: s.offsetLeft - (track.clientWidth - s.clientWidth) / 2, behavior: "smooth" }); };
+    var mark = function (i) {
+      cur = i;
+      tabs.forEach(function (t, n) { t.setAttribute("aria-selected", String(n === i)); });
+      dots.forEach(function (d, n) { d.classList.toggle("on", n === i); });
+    };
+    track.addEventListener("scroll", function () {
+      var mid = track.scrollLeft + track.clientWidth / 2, best = 0;
+      slides.forEach(function (s, n) { if (Math.abs(s.offsetLeft + s.clientWidth / 2 - mid) < Math.abs(slides[best].offsetLeft + slides[best].clientWidth / 2 - mid)) best = n; });
+      if (best !== cur) mark(best);
+    }, { passive: true });
+    tabs.forEach(function (t) { t.addEventListener("click", function () { go(Number(t.dataset.go)); }); });
+    duo.querySelector("[data-prev]").addEventListener("click", function () { go(cur - 1); });
+    duo.querySelector("[data-next]").addEventListener("click", function () { go(cur + 1); });
+    var PLAY = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>', PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>';
+    play.addEventListener("click", function () {
+      if (auto) { clearInterval(auto); auto = null; } else { auto = setInterval(function () { go(cur + 1); }, 5000); }
+      play.innerHTML = auto ? PAUSE : PLAY;
+      play.setAttribute("aria-label", auto ? "Ferma lo scorrimento automatico" : "Avvia lo scorrimento automatico");
+    });
+  });
+
   // Popup (corsi, poteri di Ingenio): [data-open] apre, la × o il clic fuori chiude
   document.querySelectorAll("[data-open]").forEach(function (b) {
     b.addEventListener("click", function () { document.getElementById(b.dataset.open).showModal(); });

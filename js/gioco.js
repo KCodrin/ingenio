@@ -165,7 +165,7 @@
       nodes += '<li class="node boss ' + bcls + '"><button type="button" data-boss="' + isola.id + '"' + (bcls === "lock" ? " disabled" : "") + ">" +
         '<span class="dot">' + (won ? ICON.check : bcls === "lock" ? ICON.lock : ICON.warn) + "</span>" +
         '<span class="nt"><b>' + esc(isola.boss.titolo) + " · Scaccia Hazard</b><small>" + (won ? "Vinta. Rigiocala quando vuoi" : bcls === "lock" ? "Si sblocca dopo tutte le tappe" : BOSS_N + " domande a tempo, 3 scudi") + "</small></span></button></li>";
-      return '<article class="island"><header><span class="label">Isola</span><h2>' + esc(isola.titolo) + '</h2><p class="lead">' + esc(isola.sottotitolo) + "</p></header>" +
+      return '<article class="island"><header><h2>' + esc(isola.titolo) + '</h2><p class="lead">' + esc(isola.sottotitolo) + "</p></header>" +
         '<ol class="path">' + nodes + "</ol>" +
         (won ? '<div class="badge-won"><span class="medal">' + ICON.star + '</span><div><b>Badge conquistato · ' + esc(isola.badge) + "</b><p>Hai scacciato Hazard dall'isola. Vuoi una formazione certificata su questi temi?</p>" +
           '<div class="bw-act"><a class="btn btn-g" href="' + isola.corso.href + '">' + esc(isola.corso.testo) + '</a><button type="button" class="btn" data-cert="' + isola.id + '">Il tuo attestato</button></div></div></div>' : "") + "</article>";
