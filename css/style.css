@@ -521,7 +521,6 @@ section:nth-of-type(even):not(.hero):not(.cta):not(.manifesto) { background: var
 .hero.hero-sub { min-height: 0; padding: 128px 0 56px; }
 .hero-sub > img { opacity: 0.55; object-position: 75% 35%; }
 .hero-sub .lead { font-size: 1.05rem; margin-bottom: 0; }
-.hero-sub .hero-duel { max-width: 620px !important; margin-top: 24px !important; }
 .hero-sub .duel.mini > div { padding: 12px 16px; }
 .hero-sub .duel.mini p { font-size: 0.88rem; }
 @media (max-width: 760px) { .hero.hero-sub { padding: 112px 0 40px; } }
@@ -572,7 +571,6 @@ main > section { padding-top: var(--space-section); padding-bottom: var(--space-
 .article-end { margin-top: 48px; }
 .steps.steps-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
 .ftr-about { margin-top: 16px; }
-.hero-sub .hero-duel { max-width: 620px; margin-top: 24px; }
 
 /* Titoli */
 h1, .hero-sub h1, .article h1 { font-size: var(--fs-h1); }
