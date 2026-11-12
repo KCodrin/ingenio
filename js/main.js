@@ -86,7 +86,7 @@
       empty.hidden = shown > 0;
     };
     q.addEventListener("input", apply);
-    // Arrivo da Chi siamo (formazione.html#soft ecc.): filtro per percorso, o ricerca se non esiste il filtro (es. #marketing)
+    // Arrivo da Chi siamo (formazione.html#sicurezza ecc.): filtro per categoria, o ricerca se non esiste il filtro
     var want = decodeURIComponent(location.hash.slice(1));
     if (want) {
       var chip = chips.find(function (c) { return c.dataset.track === want; });
@@ -100,6 +100,21 @@
         apply();
       });
     });
+    // Popup con la scheda completa del corso
+    var dlg = document.getElementById("courseDlg");
+    var data = JSON.parse(document.getElementById("courseData").textContent);
+    var set = function (id, v) { document.getElementById(id).textContent = v; };
+    list.addEventListener("click", function (e) {
+      var b = e.target.closest(".course");
+      if (!b) return;
+      var c = data[b.dataset.i];
+      document.getElementById("cdImg").src = c.img;
+      set("cdCat", c.cat); set("cdTitle", c.titolo); set("cdDesc", c.descrizione_commerciale);
+      set("cdDur", c.durata_sito); set("cdAgg", c.aggiornamento_sito); set("cdNorm", c.normativa); set("cdMod", c.modalita);
+      set("cdCta", c.call_to_action);
+      dlg.showModal();
+    });
+    dlg.addEventListener("click", function (e) { if (e.target === dlg || e.target.closest("[data-close]")) dlg.close(); });
   }
 })();
 

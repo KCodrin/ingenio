@@ -463,18 +463,33 @@ section:nth-of-type(even):not(.hero):not(.cta):not(.manifesto) { background: var
 .courses { grid-template-columns: 1fr; gap: 0; border-top: 1px solid rgba(255, 255, 255, 0.08); }
 .courses li { padding: 16px 8px; border: 0; border-bottom: 1px solid rgba(255, 255, 255, 0.08); border-radius: 0; background: none; transition: background .2s; }
 .courses li:hover { background: rgba(0, 230, 118, 0.04); }
-/* Corsi con più livelli: una riga con l'etichetta "3 livelli" e i livelli affiancati */
-.courses li.multi { flex-wrap: wrap; align-items: center; gap: 10px 24px; }
-.courses .cname { display: flex; align-items: center; gap: 12px; }
-.courses .cname em { font-style: normal; font-size: 12px; font-weight: 600; letter-spacing: .5px; padding: 3px 10px; border-radius: 999px; color: var(--green); background: rgba(0, 230, 118, 0.1); border: 1px solid rgba(0, 230, 118, 0.25); white-space: nowrap; }
-.courses .levels { display: flex; flex-wrap: wrap; gap: 8px; }
-.courses .lv { display: inline-flex; gap: 8px; align-items: baseline; padding: 6px 12px; border-radius: 10px; font-size: 14px; color: var(--soft); background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); }
-.courses .lv b { color: var(--green); font-weight: 600; font-variant-numeric: tabular-nums; }
-.courses li.multi > .levels span { white-space: nowrap; }
 /* Lista a una colonna, ma ogni riga torna con il riquadro di prima (fondo a vetro, bordo, angoli arrotondati) */
 .courses { gap: 8px; border-top: 0; }
 .courses li { padding: 16px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; }
 .courses li:hover { background: var(--card); border-color: rgba(0, 230, 118, 0.25); }
+/* Riga corso cliccabile: nome, durata, immagine 1:1 a destra; apre il popup con la scheda */
+.courses li { padding: 0; }
+.courses .course { display: grid; grid-template-columns: minmax(0, 1fr) fit-content(260px) 64px; align-items: center; gap: 16px; width: 100%; padding: 10px 10px 10px 20px; background: none; border: 0; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.courses .cname { color: var(--text); white-space: normal; }
+.courses .dur { white-space: normal; }
+.course-dlg .label::after { margin-left: 0; left: 0; transform: none; }
+.courses .dur { color: var(--green); font-weight: 600; font-size: var(--fs-small); text-align: right; }
+.courses .course img { width: 64px; height: 64px; object-fit: cover; border-radius: 8px; }
+.courses .course:focus-visible { outline: 2px solid var(--green); outline-offset: -2px; border-radius: 12px; }
+@media (max-width: 560px) { .courses .course { grid-template-columns: minmax(0, 1fr) 64px; gap: 4px 14px; padding-left: 16px; } .courses .cname { grid-area: 1 / 1; } .courses .dur { grid-area: 2 / 1; text-align: left; } .courses .course img { grid-area: 1 / 2 / 3 / 3; } }
+/* Popup del corso */
+.course-dlg { width: min(860px, 100% - 32px); max-height: calc(100svh - 32px); padding: 0; border: 1px solid rgba(0, 230, 118, 0.25); border-radius: 15px; background: #0b0b0b; color: var(--text); overflow: auto; }
+.course-dlg::backdrop { background: rgba(0, 0, 0, .75); backdrop-filter: blur(6px); }
+.course-dlg[open] { display: grid; grid-template-columns: 300px 1fr; }
+.course-dlg > img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
+.course-dlg .cd-body { padding: 32px; }
+.course-dlg .label { margin-bottom: 12px; }
+.course-dlg h2 { font-size: var(--fs-h3); text-align: left; margin: 0 0 12px; }
+.course-dlg dl { display: grid; grid-template-columns: max-content 1fr; gap: 8px 16px; margin: 20px 0; font-size: var(--fs-small); }
+.course-dlg dt { color: var(--green); font-weight: 600; }
+.course-dlg dd { margin: 0; color: var(--soft); }
+.course-dlg .x { position: absolute; top: 10px; right: 10px; width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line); background: rgba(0, 0, 0, .6); color: var(--text); font-size: 24px; line-height: 1; cursor: pointer; }
+@media (max-width: 700px) { .course-dlg[open] { grid-template-columns: 1fr; } .course-dlg > img { max-height: 40svh; } .course-dlg .cd-body { padding: 24px 20px; } .course-dlg dl { grid-template-columns: 1fr; gap: 2px; } .course-dlg dd { margin-bottom: 10px; } }
 /* Percorsi di formazione in Chi siamo: tutta la card porta ai corsi del percorso */
 .steps li:has(.track) { padding: 0; }
 .track { display: block; height: 100%; padding: 30px 24px; text-decoration: none; color: inherit; }
