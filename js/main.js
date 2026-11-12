@@ -97,9 +97,24 @@
       c.addEventListener("click", function () {
         track = c.dataset.track;
         chips.forEach(function (x) { x.setAttribute("aria-pressed", String(x === c)); });
+        var fb = document.getElementById("filterOpen");
+        fb.classList.toggle("on", track !== "all");
+        fb.setAttribute("aria-label", track === "all" ? "Filtra" : "Filtra, categoria attiva " + c.textContent);
         apply();
       });
     });
+    // Telefono: popup dei filtri; "Applica" usa lo stesso filtro dei pulsanti
+    var fdlg = document.getElementById("filterDlg");
+    document.getElementById("filterOpen").addEventListener("click", function () {
+      fdlg.querySelector('input[value="' + track + '"]').checked = true;
+      fdlg.showModal();
+    });
+    document.getElementById("filterApply").addEventListener("click", function () {
+      var v = fdlg.querySelector("input:checked").value;
+      chips.find(function (c) { return c.dataset.track === v; }).click();
+      fdlg.close();
+    });
+    fdlg.addEventListener("click", function (e) { if (e.target === fdlg || e.target.closest("[data-close]")) fdlg.close(); });
     // Popup con la scheda completa del corso
     var dlg = document.getElementById("courseDlg");
     var data = JSON.parse(document.getElementById("courseData").textContent);
