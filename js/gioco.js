@@ -43,6 +43,7 @@
     x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>',
     warn: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17v.5"/></svg>',
     bolt: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>',
+    book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 19V5M19 19v2H6"/></svg>',
     gym: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 7v10M18 7v10M3 10v4M21 10v4M6 12h12"/></svg>',
     sound: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>',
     mute: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="m16 9 5 6M21 9l-5 6"/></svg>'
@@ -158,7 +159,7 @@
         if (!d) { all = false; open = false; }
         return '<li class="node ' + cls + '"><button type="button" data-tappa="' + t.id + '"' + (cls === "lock" ? " disabled" : "") + ">" +
           '<span class="dot">' + (d ? ICON.check : cls === "lock" ? ICON.lock : n + 1) + "</span>" +
-          '<span class="nt"><b>' + esc(t.titolo) + "</b>" + (d ? stars(d.stars || 1) + "<small>Rigioca per migliorare</small>" : "<small>" + (cls === "lock" ? "Completa la tappa prima" : t.domande.length + " domande · circa 2 minuti") + "</small>") + "</span></button></li>";
+          '<span class="nt"><b>' + esc(t.titolo) + "</b>" + (d ? stars(d.stars || 1) + "<small>Rigioca per migliorare</small>" : "<small>" + (cls === "lock" ? "Completa la tappa prima" : (t.lezione ? t.lezione.length + " schede e " : "") + t.domande.length + " domande · circa " + (t.lezione ? 4 : 2) + " minuti") + "</small>") + "</span></button></li>";
       }).join("");
       var won = st.boss[isola.id], bcls = won ? "done" : all ? "now" : "lock";
       nodes += '<li class="node boss ' + bcls + '"><button type="button" data-boss="' + isola.id + '"' + (bcls === "lock" ? " disabled" : "") + ">" +
@@ -220,7 +221,38 @@
   function startTappa(isola, t) {
     session("tappa", t.domande.map(function (q, i) { return { q: q, key: qKey(t, i) }; }), { isola: isola, tappa: t });
     open();
-    intro(t.titolo, t.intro, "Inizia", ask, '<p class="gl-rules">' + ICON.shield + " Hai 3 scudi. Ogni errore ne rompe uno.</p>");
+    var cards = t.lezione || [];
+    intro(t.titolo, t.intro, cards.length ? "Inizia la lezione" : "Inizia", cards.length ? function () { learn(0); } : quizIntro,
+      cards.length ? '<p class="gl-rules">' + ICON.book + " " + cards.length + " schede da leggere, poi il quiz</p>" : "");
+    if (cards.length && st.done[t.id]) {
+      L.querySelector(".gl-foot").insertAdjacentHTML("beforeend", '<button type="button" class="btn" data-skip>Vai subito al quiz</button>');
+      L.querySelector("[data-skip]").addEventListener("click", quizIntro);
+    }
+  }
+
+  // Lezione: schede brevi da leggere una alla volta, poi il quiz
+  var SIGN = {
+    divieto: '<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="#fff" stroke="#e53935" stroke-width="5"/><path d="M8 8l24 24" stroke="#e53935" stroke-width="5"/></svg>',
+    obbligo: '<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="#1e64c8"/><path d="M12 22a8 8 0 0 1 16 0zM10 22h20" stroke="#fff" stroke-width="2.4" fill="#fff"/></svg>',
+    pericolo: '<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 38 36H2z" fill="#ffc400" stroke="#111" stroke-width="3" stroke-linejoin="round"/><path d="M20 15v10M20 29v1.5" stroke="#111" stroke-width="3.4" stroke-linecap="round"/></svg>',
+    soccorso: '<svg viewBox="0 0 40 40" aria-hidden="true"><rect x="1" y="1" width="38" height="38" rx="3" fill="#00a152"/><path d="M20 10v20M10 20h20" stroke="#fff" stroke-width="6"/></svg>',
+    antincendio: '<svg viewBox="0 0 40 40" aria-hidden="true"><rect x="1" y="1" width="38" height="38" rx="3" fill="#d32f2f"/><path d="M17 14h6v18h-6zM19 9h2v5h-2zM21 10h6" stroke="#fff" stroke-width="2.2" fill="#fff"/></svg>'
+  };
+  function learn(i) {
+    var cards = cur.tappa.lezione, c = cards[i], last = i === cards.length - 1;
+    var dots = cards.map(function (_, n) { return '<i class="' + (n === i ? "on" : n < i ? "seen" : "") + '"></i>'; }).join("");
+    var body = '<article class="lcard"><p class="lc-who"><img src="' + ING + '" alt="" width="40" height="40">Ingenio spiega · ' + (i + 1) + " di " + cards.length + "</p>" +
+      "<h2>" + esc(c.titolo) + "</h2><p>" + esc(c.testo) + "</p>" +
+      (c.punti ? '<ul class="lc-pts">' + c.punti.map(function (p) { return "<li>" + (p.f ? '<span class="sign">' + SIGN[p.f] + "</span>" : '<span class="bul"></span>') + "<span>" + esc(p.t) + "</span></li>"; }).join("") + "</ul>" : "") +
+      (c.dopo ? "<p>" + esc(c.dopo) + "</p>" : "") + '</article><div class="lc-dots" aria-hidden="true">' + dots + "</div>";
+    shell(body, '<div class="lc-nav">' + (i ? '<button type="button" class="btn" data-prev>Indietro</button>' : "") +
+      '<button type="button" class="btn btn-g" data-fwd>' + (last ? "Inizia il quiz" : "Avanti") + "</button></div>", (i + 1) / cards.length * 100, false);
+    L.querySelector("[data-fwd]").addEventListener("click", function () { if (last) quizIntro(); else learn(i + 1); });
+    var pv = L.querySelector("[data-prev]"); if (pv) pv.addEventListener("click", function () { learn(i - 1); });
+  }
+  function quizIntro() {
+    intro("Ora il quiz", "Vediamo se Hazard riesce a fregarti. " + cur.queue.length + " domande, con la spiegazione dopo ogni risposta.", "Inizia il quiz", ask,
+      '<p class="gl-rules">' + ICON.shield + " Hai 3 scudi. Ogni errore ne rompe uno.</p>");
   }
   function startBoss(isola) {
     var all = [];
