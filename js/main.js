@@ -19,7 +19,7 @@
   }
   burger.addEventListener("click", function () { setMenu(true); });
   mnav.addEventListener("click", function (e) { if (e.target.closest("a, [data-mclose]")) setMenu(false); });
-  window.matchMedia("(min-width: 1021px)").addEventListener("change", function (m) { if (m.matches) setMenu(false); });
+  window.matchMedia("(min-width: 1101px)").addEventListener("change", function (m) { if (m.matches) setMenu(false); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") setMenu(false); });
 
   // Liquid Glass: solo su Chromium e se l'utente non chiede meno movimento o trasparenza
