@@ -68,6 +68,14 @@
     }
   }
 
+  // Popup (corsi, poteri di Ingenio): [data-open] apre, la × o il clic fuori chiude
+  document.querySelectorAll("[data-open]").forEach(function (b) {
+    b.addEventListener("click", function () { document.getElementById(b.dataset.open).showModal(); });
+  });
+  document.querySelectorAll("dialog.course-dlg").forEach(function (d) {
+    d.addEventListener("click", function (e) { if (e.target === d || e.target.closest("[data-close]")) d.close(); });
+  });
+
   // Filtro corsi (pagina Formazione)
   var list = document.getElementById("courses");
   if (list) {
@@ -129,7 +137,6 @@
       set("cdCta", c.call_to_action);
       dlg.showModal();
     });
-    dlg.addEventListener("click", function (e) { if (e.target === dlg || e.target.closest("[data-close]")) dlg.close(); });
   }
 })();
 

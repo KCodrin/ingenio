@@ -509,13 +509,36 @@ section:nth-of-type(even):not(.hero):not(.cta):not(.manifesto) { background: var
 .course-dlg dd { margin: 0; color: var(--soft); }
 .course-dlg .x { position: absolute; top: 10px; right: 10px; width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line); background: rgba(0, 0, 0, .6); color: var(--text); font-size: 24px; line-height: 1; cursor: pointer; }
 @media (max-width: 700px) { .course-dlg[open] { grid-template-columns: 1fr; } .course-dlg > img { max-height: 40svh; } .course-dlg .cd-body { padding: 24px 20px; } .course-dlg dl { grid-template-columns: 1fr; gap: 2px; } .course-dlg dd { margin-bottom: 10px; } }
+/* Chi siamo: Hazard e Ingenio a coppie, nello stesso riquadro con una freccia dal problema alla soluzione */
+.duel.pair { gap: 0; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); overflow: hidden; }
+.duel.pair > div { border: 0; border-radius: 0; }
+.duel.pair > .in { border-left: 1px solid var(--line); }
+.duel.pair > .in::before { content: "→"; position: absolute; left: -17px; top: 50%; translate: 0 -50%; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--green); color: var(--green-ink); font-weight: 800; z-index: 1; }
+@media (max-width: 680px) { .duel.pair > .in { border-left: 0; border-top: 1px solid var(--line); } .duel.pair > .in::before { content: "↓"; left: 50%; top: -17px; translate: -50% 0; } }
+/* Chi siamo: i quattro poteri in griglia, ognuno apre il suo popup */
+.powers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.power { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 16px 16px 22px; border-radius: var(--radius); border: 1px solid var(--line); background: var(--card); color: inherit; font: inherit; text-align: left; cursor: pointer; transition: transform .4s ease, box-shadow .4s ease, border-color .4s ease; }
+.power:hover { transform: translateY(-10px); box-shadow: var(--glow-green); border-color: rgba(0, 230, 118, 0.2); }
+.power img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 10px; margin-bottom: 8px; }
+.power h3 { font-size: var(--fs-h3); margin: 0; }
+.power p { margin: 0; color: var(--soft); font-size: var(--fs-small); flex: 1; }
+.power .more { margin-top: 8px; }
+@media (max-width: 900px) { .powers { grid-template-columns: 1fr 1fr; gap: 12px; } .power { padding: 12px 12px 18px; } }
+.course-dlg .duel { margin-top: 20px; }
+/* Chi siamo: le parole di Hazard più grandi */
+.tags.big li { padding: 10px 18px; font-size: var(--fs-body); font-weight: 600; color: var(--hazard); background: rgba(255, 59, 92, 0.08); }
+/* Percorsi di formazione: icona al posto del numero */
+.tracks li::before { display: none; }
+.track .ico { display: grid; place-items: center; width: 60px; height: 60px; margin-bottom: 18px; border-radius: 50%; background: rgba(0, 230, 118, 0.1); color: var(--green); transition: box-shadow .3s; }
+.track .ico svg { width: 28px; height: 28px; }
+.steps li:hover .ico { box-shadow: 0 0 15px rgba(0, 230, 118, 0.4); }
 /* Percorsi di formazione in Chi siamo: tutta la card porta ai corsi del percorso */
 .steps li:has(.track) { padding: 0; }
 .track { display: block; height: 100%; padding: 30px 24px; text-decoration: none; color: inherit; }
 .steps li:has(.track)::before { margin: 30px 24px 0; }
-.track .more { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--green); }
-.track .more svg { width: 15px; height: 15px; transition: transform .3s; }
-.track:hover .more svg { transform: translateX(4px); }
+.track .more, .power .more { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--green); }
+.track .more svg, .power .more svg { width: 15px; height: 15px; transition: transform .3s; }
+.track:hover .more svg, .power:hover .more svg { transform: translateX(4px); }
 
 /* Hero delle pagine interne: compatta, alta quanto il suo contenuto (la regola .hero dava a tutte l'altezza dello schermo) */
 .hero.hero-sub { min-height: 0; padding: 128px 0 56px; }
