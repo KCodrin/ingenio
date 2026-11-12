@@ -287,12 +287,44 @@ section { padding: clamp(72px, 10vw, 128px) 0; position: relative; }
 .nav a[aria-current="page"] { color: var(--green); text-shadow: 0 0 8px rgba(0, 230, 118, 0.3); }
 .hdr .btn { min-height: 42px; padding: 0 18px; font-size: 12px; }
 @media (max-width: 1020px) {
-  .nav { position: absolute; inset: calc(100% + 8px) 0 auto; gap: 0; padding: 12px 20px; border-radius: 8px; background: #0a0a0a; border: 1px solid rgba(255, 255, 255, 0.08); transform: none; opacity: 0; visibility: hidden; transition: opacity .25s, visibility .25s; }
-  .nav.open { opacity: 1; visibility: visible; }
-  .nav a { padding: 14px 0; font-size: 14px; }
-  .nav a::after { bottom: 8px; }
+  .nav { display: none; }
 }
 .burger { border-radius: 8px; border-color: rgba(255, 255, 255, 0.12); }
+/* Menu mobile a tutta pagina: copre anche l'header; righe con separatori, Servizi a fisarmonica, contatti in fondo */
+.mnav { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; background: #000; overflow-y: auto; overscroll-behavior: contain; }
+.mnav[hidden] { display: none; }
+/* Apertura: il pannello scende dall'alto con un bagliore verde, poi le voci e i contatti entrano uno dopo l'altro */
+@media (prefers-reduced-motion: no-preference) {
+  .mnav { animation: mnav-in .5s var(--ease) both; }
+  .mnav::before { content: ""; position: fixed; inset: 0; pointer-events: none; background: radial-gradient(80% 50% at 50% 0%, rgba(0, 230, 118, 0.18), transparent 70%); animation: mnav-glow 1.2s ease-out both; }
+  .mnav-top > *, .mrow, .mnav-cta > * { animation: mnav-item .5s var(--ease) both; }
+  .mnav-top > :last-child { animation-name: mnav-spin; }
+  .mrow:nth-child(1) { animation-delay: .08s; } .mrow:nth-child(2) { animation-delay: .12s; } .mrow:nth-child(3) { animation-delay: .16s; } .mrow:nth-child(4) { animation-delay: .2s; }
+  .mrow:nth-child(5) { animation-delay: .24s; } .mrow:nth-child(6) { animation-delay: .28s; } .mrow:nth-child(7) { animation-delay: .32s; }
+  .mnav-cta > :nth-child(1) { animation-delay: .36s; } .mnav-cta > :nth-child(2) { animation-delay: .41s; } .mnav-cta > :nth-child(3) { animation-delay: .46s; }
+}
+@keyframes mnav-in { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0); } }
+@keyframes mnav-glow { 0% { opacity: 0; } 30% { opacity: 1; } 100% { opacity: .4; } }
+@keyframes mnav-item { from { opacity: 0; transform: translateY(16px); } }
+@keyframes mnav-spin { from { opacity: 0; transform: rotate(-90deg) scale(.6); } }
+.mnav-top { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px 14px 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+.mnav-x { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.12); background: var(--card); color: var(--text); cursor: pointer; }
+.mnav-list { display: flex; flex-direction: column; }
+.mrow { border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+a.mrow, .mrow summary { display: flex; align-items: center; justify-content: space-between; min-height: 64px; padding: 0 24px; font: 700 1.35rem/1.2 var(--display); letter-spacing: -0.01em; color: var(--text); text-decoration: none; cursor: pointer; list-style: none; }
+.mrow summary::-webkit-details-marker { display: none; }
+.mrow summary svg { width: 22px; height: 22px; color: var(--soft); transition: transform .3s var(--ease); }
+.mrow[open] summary svg { transform: rotate(180deg); color: var(--green); }
+a.mrow[aria-current="page"], .mrow summary[aria-current="page"] { color: var(--green); }
+.mrow ul { list-style: none; margin: 0; padding: 0 24px 16px; }
+.mrow li a { display: block; padding: 10px 0 10px 14px; border-left: 2px solid rgba(0, 230, 118, 0.25); color: var(--soft); text-decoration: none; font-size: var(--fs-body); }
+.mrow li a:hover { color: var(--green); border-left-color: var(--green); }
+.mnav-cta { margin-top: auto; display: grid; gap: 10px; padding: 24px 20px calc(24px + env(safe-area-inset-bottom, 0px)); }
+.mnav-cta .btn { justify-content: center; border-radius: 10px; min-height: 54px; text-transform: uppercase; letter-spacing: 1px; font-size: 13px; }
+.mnav-alt { display: flex; align-items: center; gap: 14px; min-height: 54px; padding: 0 18px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.12); background: var(--card); color: var(--text); text-decoration: none; font-size: var(--fs-body); overflow-wrap: anywhere; }
+.mnav-alt svg { width: 20px; height: 20px; flex: none; color: var(--green); }
+html.menu-open { overflow: hidden; }
+html.menu-open [data-cta-dock], html.menu-open .consent { display: none !important; } /* il pulsante ha style="all: initial" */
 .hero { min-height: 100svh; padding-top: 110px; }
 .hero-sub { padding-top: 130px; }
 main > section:first-child:not(.hero) { padding-top: 140px; }

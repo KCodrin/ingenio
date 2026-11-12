@@ -3,17 +3,23 @@
 
   var hdr = document.querySelector(".hdr");
   var burger = document.querySelector(".burger");
-  var nav = document.getElementById("nav");
+  var mnav = document.getElementById("mnav");
 
   function onScroll() { hdr.classList.toggle("scrolled", window.scrollY > 8); }
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
+  // Menu mobile a tutta pagina
   function setMenu(open) {
+    if (mnav.hidden === !open) return;
     burger.setAttribute("aria-expanded", String(open));
-    nav.classList.toggle("open", open);
+    mnav.hidden = !open;
+    document.documentElement.classList.toggle("menu-open", open);
+    (open ? mnav.querySelector("[data-mclose]") : burger).focus();
   }
-  burger.addEventListener("click", function () { setMenu(burger.getAttribute("aria-expanded") !== "true"); });
+  burger.addEventListener("click", function () { setMenu(true); });
+  mnav.addEventListener("click", function (e) { if (e.target.closest("a, [data-mclose]")) setMenu(false); });
+  window.matchMedia("(min-width: 1021px)").addEventListener("change", function (m) { if (m.matches) setMenu(false); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") setMenu(false); });
 
   // Liquid Glass: solo su Chromium e se l'utente non chiede meno movimento o trasparenza
