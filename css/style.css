@@ -228,7 +228,7 @@ section { padding: clamp(72px, 10vw, 128px) 0; position: relative; }
 .form .privacy input { min-height: auto; margin-top: 4px; accent-color: var(--green); }
 @media (max-width: 600px) { .form { grid-template-columns: 1fr; } }
 .contact-list { list-style: none; padding: 0; margin: 24px 0; display: grid; gap: 12px; }
-.contact-list a { text-decoration: none; font: 600 1.2rem var(--display); }
+.contact-list a { text-decoration: none; font: 600 var(--fs-lead) var(--display); }
 .contact-list a:hover { color: var(--green); }
 
 /* CTA band */
@@ -260,16 +260,8 @@ section { padding: clamp(72px, 10vw, 128px) 0; position: relative; }
 .ftr .bottom { margin: 48px auto 0; padding-top: 28px; border-top: 1px solid var(--line); text-align: center; max-width: none; font-size: var(--fs-xs); color: var(--soft); }
 @media (max-width: 760px) { .ftr .grid { grid-template-columns: 1fr; } }
 
-/* Il momento: Hazard si ritira mentre la luce di Ingenio cresce */
+/* Niente comparse allo scorrimento: i contenuti sono subito visibili */
 .reveal { opacity: 1; }
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .reveal { animation: rise linear both; animation-timeline: view(); animation-range: entry 0% entry 60%; }
-    @keyframes rise { from { opacity: 0; transform: translateY(40px); filter: blur(6px); } }
-    .duel .hz { animation: dim linear both; animation-timeline: view(); animation-range: cover 30% cover 70%; }
-    @keyframes dim { to { filter: saturate(.4) brightness(.8); } }
-  }
-}
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
 
 /* ---- Stile Ingenio (cartella referenza): colori, card, pulsanti, titoli ---- */
@@ -353,7 +345,7 @@ h2 { font-weight: 700; }
 .hero-home .actions { justify-content: center; }
 .hero::after { background: linear-gradient(90deg, var(--night) 10%, rgba(5,5,5,.6) 55%, rgba(5,5,5,.15)), linear-gradient(0deg, var(--night), transparent 30%); }
 .manifesto { overflow: hidden; }
-.ghost { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font: 800 clamp(5rem, 16vw, 15rem)/1 var(--display); letter-spacing: -0.05em; color: rgba(0, 230, 118, .04); white-space: nowrap; pointer-events: none; }
+.ghost { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font: 800 clamp(3rem, 10vw, 9.5rem)/1 var(--display); letter-spacing: -0.05em; color: rgba(0, 230, 118, .04); white-space: nowrap; pointer-events: none; }
 .manifesto .wrap { position: relative; }
 
 /* Card a vetro: tutte le stesse regole della referenza */
@@ -419,7 +411,7 @@ section:nth-of-type(even):not(.hero):not(.cta):not(.manifesto) { background: var
 .vsteps { list-style: none; counter-reset: v; margin: 40px 0; padding: 0 0 0 28px; border-left: 2px solid rgba(0, 230, 118, 0.25); }
 .vsteps li { position: relative; counter-increment: v; margin: 0 0 20px; padding: 26px 30px; border-radius: var(--radius); background: var(--card); border: 1px solid var(--line); }
 .vsteps li::before { content: counter(v); position: absolute; left: -48px; top: 24px; width: 38px; height: 38px; display: grid; place-items: center; border-radius: 50%; background: var(--night); border: 2px solid var(--green); color: var(--green); font-weight: 700; box-shadow: 0 0 12px rgba(0, 230, 118, 0.35); }
-.vsteps h3 { font-size: var(--fs-lead); margin-bottom: 8px; }
+.vsteps h2, .vsteps h3 { font-size: var(--fs-lead); margin-bottom: 8px; }
 .vsteps p { margin: 0; }
 .notice { margin: 40px 0; padding: 32px; border-radius: var(--radius); background: var(--card); border: 1px dashed rgba(0, 230, 118, 0.35); }
 .notice h2 { font-size: var(--fs-h3); }
@@ -636,7 +628,7 @@ h1, .hero-sub h1, .article h1 { font-size: var(--fs-h1); }
 .hero-home h1 { font-size: var(--fs-h1-home); }
 h2, .svc-full h2, .svc-part, .char h3, .cta h2 { font-size: var(--fs-h2); }
 .article h2 { font-size: 1.6rem; }
-h3, .svc h3, .news h3, .steps h3, .kid-card h3, .vsteps h3, .svc-group, .notice h2, .ftr h2 { font-size: var(--fs-h3); }
+h3, .svc h3, .news h3, .steps h3, .kid-card h3, .vsteps h2, .vsteps h3, .svc-group, .notice h2, .ftr h2 { font-size: var(--fs-h3); }
 .manifesto p { font-size: var(--fs-statement); }
 
 /* Testo */
@@ -769,7 +761,7 @@ html.game-open [data-cta-dock], html.game-open .consent { display: none !importa
 .gl-foot.ok .gl-fb b, .gl-foot.ok .fb-ico { color: var(--green); }
 .gl-foot.ko .gl-fb b, .gl-foot.ko .fb-ico { color: var(--hazard); }
 .gl-fb p { margin: 0 0 4px; font-size: var(--fs-small); }
-.gl-body h2:focus { outline: none; }
+
 .fb-ico { display: grid; place-items: center; flex: none; width: 40px; height: 40px; border-radius: 50%; background: currentColor; }
 .fb-ico svg { width: 22px; height: 22px; color: #000; }
 .btn-r { background: var(--hazard); border-color: var(--hazard); color: #fff; }
@@ -1000,3 +992,48 @@ html.game-open [data-cta-dock], html.game-open .consent { display: none !importa
 .svc .duo-go { right: 18px; bottom: 22px; width: 44px; height: 44px; }
 .svc:hover .duo-go { transform: scale(1.08); background: var(--green); }
 .svc:hover { border-color: rgba(255, 255, 255, 0.2); }
+
+/* =====================================================================
+   REVISIONE TASTESKILL (2026-11-16): accessibilità e piccoli difetti
+   ===================================================================== */
+/* Fuoco da tastiera sempre visibile, anche dentro contenitori che tagliano i bordi (carosello, card, liste) */
+.svc:focus-visible, .power:focus-visible, .course:focus-visible, .duo-go:focus-visible, .duo-tabs button:focus-visible,
+.chips a:focus-visible, .btn:focus-visible, .social a:focus-visible, .brand:focus-visible, .mrow:focus-visible, .lcard a:focus-visible { outline: 3px solid var(--green); outline-offset: -3px; }
+.duo-go:focus-visible { outline-color: #000; }
+/* Badge bloccati dell'Accademia: leggibili (contrasto sopra 4,5:1), si distinguono dal lucchetto e dal colore, non dalla trasparenza */
+.wall li { opacity: 1; }
+.wall li:not(.on) b { color: rgba(255, 255, 255, 0.72); }
+.wall li:not(.on) small { color: rgba(255, 255, 255, 0.62); }
+.levels li:not(.on) b, .levels li:not(.on) small { color: rgba(255, 255, 255, 0.62); }
+/* "Gestisci cookie" è un pulsante, con l'aspetto di un link */
+.linklike { padding: 0; border: 0; background: none; color: inherit; font: inherit; text-decoration: inherit; cursor: pointer; }
+/* Newsletter: etichetta visibile, pulsante con gli stessi angoli degli altri */
+.nl-label { display: block; margin-top: 16px; font-size: var(--fs-small); color: var(--soft); }
+.nl-label + .nl { margin-top: 8px; }
+.nl button { border-radius: 0 10px 10px 0; min-height: 48px; }
+/* Telefono: tutti i pulsanti e i link isolati almeno 44px */
+@media (max-width: 760px) {
+  .btn { min-height: 48px; }
+  .social a { width: 44px; height: 44px; }
+  .ftr .brand { min-height: 44px; }
+  /* l'immagine di apertura parte sotto l'header, che non la copre */
+  .hero-sub > img { top: 84px; height: calc(100% - 84px); }
+}
+/* Il banner dei cookie non copre la fine della pagina: spazio in fondo finché è aperto */
+html.consent-open body { padding-bottom: calc(84px + var(--consent-h, 140px) + 24px); }
+/* Schermi da 320px: le griglie si stringono fino allo schermo e i pulsanti lunghi vanno a capo */
+.news { grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr)); }
+.courses { grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); }
+.svc-list { grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); }
+.kid-grid { grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr)); }
+@media (max-width: 420px) { .btn { white-space: normal; text-align: center; justify-content: center; } }
+.power { min-width: 0; }
+@media (max-width: 900px) { .powers { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+p a, li a, .contact-list li { overflow-wrap: anywhere; }
+.split > * { min-width: 0; }
+/* Con la tastiera il fuoco non finisce sotto l'header, il pulsante "Parla con Ingenio" o il banner dei cookie */
+html { scroll-padding-top: 100px; scroll-padding-bottom: 120px; }
+html.consent-open { scroll-padding-bottom: calc(120px + var(--consent-h, 140px)); }
+.nl { padding: 4px; }
+.nl button { border-radius: 8px; min-height: 44px; }
+.nl button { border: 2px solid var(--green); }

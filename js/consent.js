@@ -36,10 +36,14 @@
       const was = get();
       set(b.dataset.c);
       box.remove();
+      document.documentElement.classList.remove('consent-open');
       if (b.dataset.c === 'yes') loadGA();
       else if (was === 'yes') location.reload();   // revoca: ricarica senza GA
     });
     document.body.appendChild(box);
+    // spazio in fondo alla pagina, così il banner non copre il footer
+    document.documentElement.style.setProperty('--consent-h', box.offsetHeight + 'px');
+    document.documentElement.classList.add('consent-open');
   }
 
   document.addEventListener('click', (e) => {
